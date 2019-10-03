@@ -55,3 +55,16 @@ TEST(FileBPM,ConvertDataToInt)
     for(int i = 30 ; i < 40 ; i++)result += data[i];
     ASSERT_EQ(4,result);
 }
+
+TEST(FileBPM,AddUpInRows)
+{
+    ReadFilePBM fileToTest;
+    fileToTest.OpenFile(nameTestedFile);
+    fileToTest.ReadData();
+    fileToTest.AddUpValuesToTheirLeftCentersInRows();
+//    string result (fileToTest.RawData()+3*10,(size_t)10);
+    auto data = fileToTest.DataInt();
+    string result ("");
+    for(int i = 30 ; i < 40 ; i++)result += std::to_string(data[i]);
+    ASSERT_EQ("0000400000",result);
+}

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <fstream>
+#include <cmath>
 
 using namespace std;
 
@@ -16,6 +17,7 @@ public:
     void ConvertDataToInt();
     char* RawData();
     std::vector<int> DataInt();
+    void AddUpValuesToTheirLeftCentersInRows();
 private:
     std::ifstream ifs;
     int sizeX, sizeY;
