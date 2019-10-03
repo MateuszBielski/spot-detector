@@ -32,16 +32,26 @@ TEST(OpenFilePBM,ReadSize)
 {
     ReadFilePBM fileToTest;
     fileToTest.OpenFile(nameTestedFile);
+    fileToTest.ReadData();
     ASSERT_EQ(10,fileToTest.getSizeX());
 }
 
-TEST(FileBPM,ConvertDataToIntArrayXY)
+TEST(FileBPM,DataLoadedCorrectly)
 {
     ReadFilePBM fileToTest;
     fileToTest.OpenFile(nameTestedFile);
-    string result;
-//    fileToTest.ConvertDataToIntArrayXY();
-//    reusult = 
+    fileToTest.ReadData();
+    string result (fileToTest.RawData()+3*10,(size_t)10);
     ASSERT_EQ("0001111000",result);
-    
+}
+
+TEST(FileBPM,ConvertDataToInt)
+{
+    ReadFilePBM fileToTest;
+    fileToTest.OpenFile(nameTestedFile);
+    fileToTest.ReadData();
+    auto data = fileToTest.DataInt();
+    int result = 0;
+    for(int i = 30 ; i < 40 ; i++)result += data[i];
+    ASSERT_EQ(4,result);
 }

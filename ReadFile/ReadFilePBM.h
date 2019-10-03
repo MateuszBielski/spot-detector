@@ -13,11 +13,14 @@ public:
     void ReadData();
     bool isOpen();
     int getSizeX();
-    void ConvertDataToIntArrayXY();
+    void ConvertDataToInt();
+    char* RawData();
+    std::vector<int> DataInt();
 private:
     std::ifstream ifs;
     int sizeX, sizeY;
-    
+    char * data = nullptr;
+    std::vector<int> dataInt;
 };
 
 #endif

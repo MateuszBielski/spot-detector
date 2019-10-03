@@ -2,7 +2,7 @@
 bool ReadFilePBM::OpenFile(string name)
 {
     ifs.open(name);
-    ReadData();
+//    ReadData();
     return ifs.is_open();
 }
 int ReadFilePBM::getSizeX()
@@ -18,6 +18,9 @@ ReadFilePBM::~ReadFilePBM()
     if (ifs.is_open()) {
         ifs.close();
     }
+    if(data != nullptr) {
+        delete [] data;
+    }
 }
 void ReadFilePBM::ReadData()
 {
@@ -30,14 +33,37 @@ void ReadFilePBM::ReadData()
     while (getline(ss, param, (char)0x9)) {
         params.push_back(param);
     }
-//    printf("%d ",(int)params.size());
+
     sizeX = stoi(params[0]);
     sizeY = stoi(params[1]);
     
-    string nextLine;
-    while (getline(ifs,nextLine))
+    int dataSize = 2 * sizeX * sizeY;
+    data = new char[dataSize];
+    ifs.read(data, dataSize);
+    
+    ifs.close();
+    char * dataAgregated = new char[dataSize/2];
+    for(int i = 0 ; i < dataSize/2 ; i++)
     {
-        
+        dataAgregated[i] = data[i*2];
     }
+    delete [] data;
+    data = dataAgregated;
+    ConvertDataToInt();
 }
 
+char* ReadFilePBM::RawData()
+{
+    return data;
+}
+void ReadFilePBM::ConvertDataToInt()
+{
+    for(int i = 0; i < sizeX * sizeY ; i++){
+        char acell = data[i];
+        dataInt.push_back(atoi(&acell));
+    }
+}
+std::vector<int> ReadFilePBM::DataInt()
+{
+    return dataInt;
+}
