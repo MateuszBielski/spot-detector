@@ -106,3 +106,13 @@ void ReadFilePBM::AddUpValues(CalculateIndex calculateIndex)
         }
     }
 }
+string ReadFilePBM::CalculatedRadius()
+{
+    ReadData();
+    AddUpValuesToTheirLeftCentersInRows();
+    AddUpValuesToTheirUpCentersInColumns();
+    string result;
+    std::for_each(dataInt.begin(), dataInt.end(), [this](int n) { if(n > 0)radius.push_back((int)ceil(sqrt(n/3.14))); });
+    std::for_each(radius.begin(),radius.end(),[&result](int n){result +=std::to_string(n)+','; });
+    return result;
+}

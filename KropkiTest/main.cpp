@@ -103,3 +103,9 @@ TEST(FileBPM,CountedAreasInCenters)
     std::for_each(data.begin(), data.end(), writeAppend);
     ASSERT_EQ("5,24,12,",result);
 }
+TEST(FileBPM,ListCalculateRadius)
+{
+    ReadFilePBM fileToTest;
+    fileToTest.OpenFile("../kropkiTest12x12.pbm");
+    ASSERT_EQ("2,3,2,",fileToTest.CalculatedRadius());
+}

@@ -4,6 +4,8 @@
 #include <string>
 #include <fstream>
 #include <cmath>
+#include <functional>
+#include <sstream>
 
 using namespace std;
 
@@ -21,11 +23,13 @@ public:
     std::vector<int> DataInt();
     void AddUpValuesToTheirLeftCentersInRows();
     void AddUpValuesToTheirUpCentersInColumns();
+    string CalculatedRadius();
 private:
     std::ifstream ifs;
     int sizeX, sizeY;
     char * data = nullptr;
-    std::vector<int> dataInt;
+    std::vector<int> dataInt, radius;
+    
     
     void AddUpValues(CalculateIndex);
 };

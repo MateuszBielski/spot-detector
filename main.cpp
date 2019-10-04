@@ -1,7 +1,13 @@
-#include <stdio.h>
+//#include <stdio.h>
+#include <iostream>
+#include <ReadFile/ReadFilePBM.h>
+
+using namespace std;
 
 int main(int argc, char **argv)
 {
-	printf("hello world\n");
+	ReadFilePBM fileToTest;
+    fileToTest.OpenFile("../kropki.pbm");
+    cout<<fileToTest.CalculatedRadius();
 	return 0;
 }

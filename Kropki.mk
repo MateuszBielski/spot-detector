@@ -3,17 +3,17 @@
 ## any manual changes will be erased      
 ##
 ## Debug
-ProjectName            :=KropkiTest
+ProjectName            :=Kropki
 ConfigurationName      :=Debug
 WorkspacePath          := "/home/mateusz/gtkmmWS"
-ProjectPath            := "/home/mateusz/gtkmmWS/Kropki/KropkiTest"
+ProjectPath            := "/home/mateusz/gtkmmWS/Kropki"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
 CurrentFilePath        :=
 CurrentFileFullPath    :=
 User                   :=Mateusz Bielski
-Date                   :=14/10/19
+Date                   :=04/10/19
 CodeLitePath           :="/home/mateusz/.codelite"
 LinkerName             :=/usr/bin/g++
 SharedObjectLinkerName :=/usr/bin/g++ -shared -fPIC
@@ -32,16 +32,16 @@ Preprocessors          :=
 ObjectSwitch           :=-o 
 ArchiveOutputSwitch    := 
 PreprocessOnlySwitch   :=-E
-ObjectsFileList        :="KropkiTest.txt"
+ObjectsFileList        :="Kropki.txt"
 PCHCompileFlags        :=
 MakeDirCommand         :=mkdir -p
-LinkOptions            :=  -lgtest -lgtest_main -pthread
-IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch)/home/mateusz/TestGoogleCpp/googletest-master/googletest/include 
+LinkOptions            :=  
+IncludePath            :=  $(IncludeSwitch). $(IncludeSwitch). 
 IncludePCH             := 
 RcIncludePath          := 
 Libs                   := 
 ArLibs                 :=  
-LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)/home/mateusz/TestGoogleCpp/myGoogTestBuild/lib 
+LibPath                := $(LibraryPathSwitch). 
 
 ##
 ## Common variables
@@ -50,7 +50,7 @@ LibPath                := $(LibraryPathSwitch). $(LibraryPathSwitch)/home/mateus
 AR       := /usr/bin/ar rcu
 CXX      := /usr/bin/g++
 CC       := /usr/bin/gcc
-CXXFLAGS :=  -g -Os -std=c++17 $(Preprocessors)
+CXXFLAGS :=  -Os -std=c++17 $(Preprocessors)
 CFLAGS   :=   $(Preprocessors)
 ASFLAGS  := 
 AS       := /usr/bin/as
@@ -60,7 +60,7 @@ AS       := /usr/bin/as
 ## User defined environment variables
 ##
 CodeLiteDir:=/usr/share/codelite
-Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) 
+Objects0=$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IntermediateDirectory)/ReadFile_ReadFilePBM.cpp$(ObjectSuffix) 
 
 
 
@@ -92,12 +92,20 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/mateusz/gtkmmWS/Kropki/KropkiTest/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/mateusz/gtkmmWS/Kropki/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM "main.cpp"
 
 $(IntermediateDirectory)/main.cpp$(PreprocessSuffix): main.cpp
 	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/main.cpp$(PreprocessSuffix) "main.cpp"
+
+$(IntermediateDirectory)/ReadFile_ReadFilePBM.cpp$(ObjectSuffix): ReadFile/ReadFilePBM.cpp $(IntermediateDirectory)/ReadFile_ReadFilePBM.cpp$(DependSuffix)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/mateusz/gtkmmWS/Kropki/ReadFile/ReadFilePBM.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/ReadFile_ReadFilePBM.cpp$(ObjectSuffix) $(IncludePath)
+$(IntermediateDirectory)/ReadFile_ReadFilePBM.cpp$(DependSuffix): ReadFile/ReadFilePBM.cpp
+	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/ReadFile_ReadFilePBM.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/ReadFile_ReadFilePBM.cpp$(DependSuffix) -MM "ReadFile/ReadFilePBM.cpp"
+
+$(IntermediateDirectory)/ReadFile_ReadFilePBM.cpp$(PreprocessSuffix): ReadFile/ReadFilePBM.cpp
+	$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) $(PreprocessOnlySwitch) $(OutputSwitch) $(IntermediateDirectory)/ReadFile_ReadFilePBM.cpp$(PreprocessSuffix) "ReadFile/ReadFilePBM.cpp"
 
 
 -include $(IntermediateDirectory)/*$(DependSuffix)
