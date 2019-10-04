@@ -69,32 +69,38 @@ std::vector<int> ReadFilePBM::DataInt()
 }
 void ReadFilePBM::AddUpValuesToTheirLeftCentersInRows()
 {
-    for(int r = 0 ; r < sizeY ; r++){
+    AddUpValues([this](int b, int a){return a + b * sizeX;});
+}
+void ReadFilePBM::AddUpValuesToTheirUpCentersInColumns()
+{
+    AddUpValues([this](int a, int b){return a + b * sizeX;});
+}
+
+void ReadFilePBM::AddUpValues(CalculateIndex calculateIndex)
+{
+    for(int j = 0 ; j < sizeX ; j++){
         int first,center,last;
         bool insideDetectedArea = false;
         bool prevInsideDetectedArea = false;
         bool stepInDetectedArea = false;
         bool stepOutDetectedArea = false;
         int sum = 0;
-        for(int c = 0; c < sizeX ; c++){
-            int currentIndex = c + r * sizeX;
-            int& currentElement = dataInt[currentIndex];
+        for(int k = 0; k < sizeY ; k++){
+            int& currentElement = dataInt[calculateIndex(j,k)];
             insideDetectedArea = currentElement > 0 ? true : false;
             stepInDetectedArea = !prevInsideDetectedArea && insideDetectedArea;
             stepOutDetectedArea = prevInsideDetectedArea && !insideDetectedArea;
-            if(stepInDetectedArea)first = currentIndex;
+            if(stepInDetectedArea)first = k;
             
             if(insideDetectedArea){
                 sum += currentElement;
                 currentElement = 0;
-                cout<<" sum: "<<sum;
             }
             if(stepOutDetectedArea){
-                last = currentIndex - 1;
+                last = k - 1;
                 center = (int)floor((last + first)/2.0);
-                dataInt[center] = sum;
+                dataInt[calculateIndex(j,center)] = sum;
                 sum = 0;
-                cout<<" center "<<center;
             }
             prevInsideDetectedArea = insideDetectedArea;
         }

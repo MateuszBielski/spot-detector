@@ -7,6 +7,8 @@
 
 using namespace std;
 
+typedef std::function<int(int,int)> CalculateIndex;
+
 class ReadFilePBM {
 public:
     ~ReadFilePBM();
@@ -18,11 +20,14 @@ public:
     char* RawData();
     std::vector<int> DataInt();
     void AddUpValuesToTheirLeftCentersInRows();
+    void AddUpValuesToTheirUpCentersInColumns();
 private:
     std::ifstream ifs;
     int sizeX, sizeY;
     char * data = nullptr;
     std::vector<int> dataInt;
+    
+    void AddUpValues(CalculateIndex);
 };
 
 #endif
